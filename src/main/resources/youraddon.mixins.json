@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.kotakotik.createaddontemplate.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "hackforge.refmap.json",
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
