@@ -1,7 +1,6 @@
-package com.kotakotik.createaddontemplate.register;
+package com.example.createaddontemplate.register;
 
-import com.kotakotik.createaddontemplate.CreateAddon;
-import com.simibubi.create.AllBlocks;
+import com.example.createaddontemplate.CreateAddon;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.item.ItemGroup;
