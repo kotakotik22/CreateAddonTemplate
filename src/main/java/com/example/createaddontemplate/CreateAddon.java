@@ -3,8 +3,10 @@ package com.example.createaddontemplate;
 import com.example.createaddontemplate.register.*;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.repack.registrate.util.NonNullLazyValue;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DatagenModLoader;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
@@ -35,5 +37,7 @@ public class CreateAddon {
             modEventBus.addListener((GatherDataEvent g) -> ModPonder.generateLang(r, g));
         }
         modEventBus.addListener((FMLClientSetupEvent e) -> ModPonder.register());
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                () -> ModPartials::load);
     }
 }
