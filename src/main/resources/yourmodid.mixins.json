@@ -2,7 +2,7 @@
   "required": true,
   "package": "mod.yourname.yourmodid.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "modid.refmap.json",
+  "refmap": "yourmodid.refmap.json",
   "mixins": [
   ],
   "injectors": {
