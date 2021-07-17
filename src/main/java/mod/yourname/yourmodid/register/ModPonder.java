@@ -1,10 +1,8 @@
-package com.example.createaddontemplate.register;
+package mod.yourname.yourmodid.register;
 
-import com.example.createaddontemplate.CreateAddon;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
-import com.simibubi.create.foundation.ponder.content.PonderTag;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import mod.yourname.yourmodid.BuildConfig;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 
 public class ModPonder {
@@ -17,7 +15,7 @@ public class ModPonder {
         PonderRegistry.provideLangEntries().getAsJsonObject().entrySet().forEach(e -> {
             String k = e.getKey();
             String v = e.getValue().getAsString();
-            if (k.contains(CreateAddon.modid + ".")) {
+            if (k.contains(BuildConfig.MODID + ".")) {
                 registrate.addRawLang(k, v);
             }
         });
