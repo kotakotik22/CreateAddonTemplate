@@ -37,7 +37,7 @@ description = '''
 Your Create addon description!
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-# TODO: change all of the depdendencies.createaddon to dependencies.yourmodid !
+# TODO: change all of the depdendencies.yourmodid to dependencies.(your modid) !
 [[dependencies.yourmodid]] #optional
 # the modid of the dependency
 modId = "forge" #mandatory
