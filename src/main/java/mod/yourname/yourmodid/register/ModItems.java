@@ -1,15 +1,15 @@
-package com.example.createaddontemplate.register;
+package mod.yourname.yourmodid.register;
 
-import com.example.createaddontemplate.CreateAddon;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import mod.yourname.yourmodid.BuildConfig;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
 public class ModItems {
-    public static ItemGroup itemGroup = new ItemGroup(CreateAddon.modid) {
+    public static ItemGroup itemGroup = new ItemGroup(BuildConfig.MODID) {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(AllItems.WRENCH.get());
         }
     };

@@ -1,6 +1,6 @@
-package com.example.createaddontemplate;
+package mod.yourname.yourmodid;
 
-import com.example.createaddontemplate.register.*;
+import mod.yourname.yourmodid.register.*;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.repack.registrate.util.NonNullLazyValue;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,17 +14,15 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// TODO: rename this class! and package name!
-@Mod(CreateAddon.modid)
+// TODO: rename this class! and package name! package name should be mod.yourname.modid, see import of BuildConfig class
+@Mod(BuildConfig.MODID)
 public class CreateAddon {
 
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
-
-    public static final String modid = "youraddon"; // TODO: change this!
+    private static final Logger LOGGER = LogManager.getLogger(BuildConfig.MODID);
     public static IEventBus modEventBus;
 
-    public static final NonNullLazyValue<CreateRegistrate> registrate = CreateRegistrate.lazy(modid);
+    public static final NonNullLazyValue<CreateRegistrate> registrate = CreateRegistrate.lazy(BuildConfig.MODID);
 
     public CreateAddon() {
         modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
