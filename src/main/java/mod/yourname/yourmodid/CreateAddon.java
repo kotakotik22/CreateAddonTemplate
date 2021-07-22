@@ -3,6 +3,7 @@ package mod.yourname.yourmodid;
 import mod.yourname.yourmodid.register.*;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.repack.registrate.util.NonNullLazyValue;
+import mod.yourname.yourmodid.register.config.ModConfigs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DatagenModLoader;
@@ -37,5 +38,8 @@ public class CreateAddon {
         modEventBus.addListener((FMLClientSetupEvent e) -> ModPonder.register());
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
                 () -> ModPartials::load);
+        modEventBus.addListener(ModConfigs::onLoad);
+        modEventBus.addListener(ModConfigs::onReload);
+        ModConfigs.register();
     }
 }

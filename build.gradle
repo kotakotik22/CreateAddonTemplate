@@ -175,6 +175,7 @@ def hasUnstaged = { ->
 buildConfig {
     buildConfigField 'String', 'MODID', "\"${modid}\""
     buildConfigField 'String', 'VERSION', "\"${project.version}\""
+    buildConfigField 'String', 'DISPLAY_NAME', "\"${display_name}\""
     def gitstage = "\"${getGitHash()}" + (hasUnstaged() ? "-modified" : "") + "\""
     println("Using git stage ${gitstage}")
     buildConfigField "String", "GITHASH", gitstage
