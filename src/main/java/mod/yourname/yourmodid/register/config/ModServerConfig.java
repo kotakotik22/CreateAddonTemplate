@@ -15,18 +15,20 @@ public class ModServerConfig extends ModConfigs.Config {
         protected Map<ResourceLocation, ConfigFloat> impacts = new HashMap<>();
         protected Map<ResourceLocation, ConfigFloat> capacities = new HashMap<>();
 
-                {
+        @Override
+        protected void registerAll(ForgeConfigSpec.Builder builder) {
             BlockStressDefaults.DEFAULT_IMPACTS.forEach((r, i) -> {
                 if (r.getNamespace().equals(BuildConfig.MODID)) {
                     impacts.put(r, f(i.floatValue(), Float.MAX_VALUE, r.getPath()));
                 }
             });
             BlockStressDefaults.DEFAULT_CAPACITIES.forEach((r, i) -> {
-                if (r.getNamespace().equals(BuildConfig.MODID)) {
-                    capacities.put(r, f(i.floatValue(), Float.MAX_VALUE, r.getPath()));
-                }
+//                if (r.getNamespace().equals(BuildConfig.MODID)) {
+                capacities.put(r, f(i.floatValue(), Float.MAX_VALUE, r.getPath()));
+//                }
             });
             BlockStressValues.registerProvider(BuildConfig.MODID, this);
+            super.registerAll(builder);
         }
 
         @Override
@@ -52,5 +54,5 @@ public class ModServerConfig extends ModConfigs.Config {
         }
     }
 
-//    public StressValues stressValues = nested(0, StressValues::new);
+    public StressValues stressValues = nested(0, StressValues::new);
 }

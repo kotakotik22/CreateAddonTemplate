@@ -1,5 +1,7 @@
 package mod.yourname.yourmodid;
 
+import com.simibubi.create.foundation.block.BlockStressDefaults;
+import com.simibubi.create.foundation.block.BlockStressValues;
 import mod.yourname.yourmodid.register.*;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.repack.registrate.util.NonNullLazyValue;

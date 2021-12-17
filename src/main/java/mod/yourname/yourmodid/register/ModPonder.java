@@ -8,9 +8,7 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 
 public class ModPonder {
     public static void register() {
-        PonderRegistry.startRegistration(BuildConfig.MODID);
         // Put your ponder here!
-        PonderRegistry.endRegistration();
     }
 
     public static void generateLang(CreateRegistrate registrate, GatherDataEvent event) {
