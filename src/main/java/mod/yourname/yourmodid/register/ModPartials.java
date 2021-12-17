@@ -3,7 +3,7 @@ package mod.yourname.yourmodid.register;
 import com.jozufozu.flywheel.core.PartialModel;
 import com.simibubi.create.Create;
 import mod.yourname.yourmodid.BuildConfig;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class ModPartials {
     public static PartialModel get(String name) {

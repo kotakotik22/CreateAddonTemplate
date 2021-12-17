@@ -1,19 +1,17 @@
 package mod.yourname.yourmodid;
 
-import com.simibubi.create.foundation.block.BlockStressDefaults;
-import com.simibubi.create.foundation.block.BlockStressValues;
-import mod.yourname.yourmodid.register.*;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.repack.registrate.util.NonNullLazyValue;
+import mod.yourname.yourmodid.register.*;
 import mod.yourname.yourmodid.register.config.ModConfigs;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DatagenModLoader;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

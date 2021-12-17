@@ -3,11 +3,11 @@ package mod.yourname.yourmodid.register;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import mod.yourname.yourmodid.BuildConfig;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 
 public class ModItems {
-    public static ItemGroup itemGroup = new ItemGroup(BuildConfig.MODID) {
+    public static CreativeModeTab itemGroup = new CreativeModeTab(BuildConfig.MODID) {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(AllItems.WRENCH.get());
@@ -15,6 +15,6 @@ public class ModItems {
     };
 
     public static void register(CreateRegistrate registrate) {
-        registrate.itemGroup(()->itemGroup, "Create Addon"); // TODO: change this
+        registrate.creativeModeTab(()->itemGroup, BuildConfig.DISPLAY_NAME);
     }
 }
