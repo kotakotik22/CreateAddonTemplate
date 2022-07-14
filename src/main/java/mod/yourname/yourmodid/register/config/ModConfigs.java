@@ -1,8 +1,11 @@
 package mod.yourname.yourmodid.register.config;
 
 import com.simibubi.create.foundation.config.ConfigBase;
+import mod.yourname.yourmodid.BuildConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.StringUtils;
@@ -13,65 +16,72 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+@Mod.EventBusSubscriber(modid = BuildConfig.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModConfigs {
-    public static ModServerConfig SERVER;
+	// no instances
+	private ModConfigs() {
+	}
 
-    public static class Config extends ConfigBase {
-        @Override
-        protected void registerAll(ForgeConfigSpec.Builder builder) {
-            // prevent crashes with empty config
-            if (children == null) {
-                children = new ArrayList<>();
-            }
-            if (allValues == null) {
-                allValues = new ArrayList<>();
-            }
-            super.registerAll(builder);
-        }
+	public static ModServerConfig SERVER;
 
-        @Override
-        public String getName() {
-            return StringUtils.uncapitalize(getClass().getSimpleName());
-        }
-    }
+	public static class Config extends ConfigBase {
+		@Override
+		protected void registerAll(ForgeConfigSpec.Builder builder) {
+			// prevent crashes with empty config
+			if (children == null) {
+				children = new ArrayList<>();
+			}
+			if (allValues == null) {
+				allValues = new ArrayList<>();
+			}
+			super.registerAll(builder);
+		}
 
-    static Map<Config, ModConfig.Type> configs = new HashMap<>();
+		@Override
+		public String getName() {
+			return StringUtils.uncapitalize(getClass().getSimpleName());
+		}
+	}
 
-    private static <T extends Config> T register(Supplier<T> factory, ModConfig.Type side) {
-        Pair<T, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(builder -> {
-            T config = factory.get();
-            config.registerAll(builder);
-            return config;
-        });
+	static Map<Config, ModConfig.Type> configs = new HashMap<>();
 
-        T config = specPair.getLeft();
-        config.specification = specPair.getRight();
-        configs.put(config, side);
-        return config;
-    }
+	private static <T extends Config> T register(Supplier<T> factory, ModConfig.Type side) {
+		Pair<T, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(builder -> {
+			T config = factory.get();
+			config.registerAll(builder);
+			return config;
+		});
 
-    public static void register() {
-        SERVER = register(ModServerConfig::new, ModConfig.Type.SERVER);
-        // server is here as an example, as its the most used config type in create, and adding more is pretty much the same
+		T config = specPair.getLeft();
+		config.specification = specPair.getRight();
+		configs.put(config, side);
+		return config;
+	}
 
-        for (Map.Entry<Config, ModConfig.Type> pair : configs.entrySet())
-            ModLoadingContext.get()
-                    .registerConfig(pair.getValue(), pair.getKey().specification);
-    }
+	public static void register() {
+		SERVER = register(ModServerConfig::new, ModConfig.Type.SERVER);
+		// server is here as an example, as its the most used config type in create, and adding more is pretty much the same
 
-    public static void onLoad(ModConfigEvent.Loading event) {
-        for (Map.Entry<Config, ModConfig.Type> pair : configs.entrySet())
-            if (pair.getKey().specification == event.getConfig()
-                    .getSpec())
-                pair.getKey()
-                        .onLoad();
-    }
+		for (Map.Entry<Config, ModConfig.Type> pair : configs.entrySet())
+			ModLoadingContext.get()
+					.registerConfig(pair.getValue(), pair.getKey().specification);
+	}
 
-    public static void onReload(ModConfigEvent.Reloading event) {
-        for (Map.Entry<Config, ModConfig.Type> pair : configs.entrySet())
-            if (pair.getKey().specification == event.getConfig()
-                    .getSpec())
-                pair.getKey()
-                        .onReload();
-    }
+	@SubscribeEvent
+	public static void onLoad(ModConfigEvent.Loading event) {
+		for (Map.Entry<Config, ModConfig.Type> pair : configs.entrySet())
+			if (pair.getKey().specification == event.getConfig()
+					.getSpec())
+				pair.getKey()
+						.onLoad();
+	}
+
+	@SubscribeEvent
+	public static void onReload(ModConfigEvent.Reloading event) {
+		for (Map.Entry<Config, ModConfig.Type> pair : configs.entrySet())
+			if (pair.getKey().specification == event.getConfig()
+					.getSpec())
+				pair.getKey()
+						.onReload();
+	}
 }

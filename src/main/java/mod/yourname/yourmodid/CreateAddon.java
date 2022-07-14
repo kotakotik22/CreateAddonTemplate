@@ -1,7 +1,7 @@
 package mod.yourname.yourmodid;
 
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.repack.registrate.util.NonNullLazyValue;
+import com.simibubi.create.repack.registrate.util.nullness.NonNullSupplier;
 import mod.yourname.yourmodid.register.*;
 import mod.yourname.yourmodid.register.config.ModConfigs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,28 +18,25 @@ import org.apache.logging.log4j.Logger;
 // TODO: rename this class! and package name! package name should be mod.yourname.modid, see import of BuildConfig class
 @Mod(BuildConfig.MODID)
 public class CreateAddon {
+	// Directly reference a log4j logger.
+	private static final Logger LOGGER = LogManager.getLogger(BuildConfig.MODID);
+	public static IEventBus modEventBus;
 
-    // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger(BuildConfig.MODID);
-    public static IEventBus modEventBus;
+	public static final NonNullSupplier<CreateRegistrate> registrate = CreateRegistrate.lazy(BuildConfig.MODID);
 
-    public static final NonNullLazyValue<CreateRegistrate> registrate = CreateRegistrate.lazy(BuildConfig.MODID);
-
-    public CreateAddon() {
-        modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        CreateRegistrate r = registrate.get();
-        ModItems.register(r);
-        ModBlocks.register(r);
-        ModEntities.register(r);
-        ModTiles.register(r);
-        if (DatagenModLoader.isRunningDataGen()) {
-            modEventBus.addListener((GatherDataEvent g) -> ModPonder.generateLang(r, g));
-        }
-        modEventBus.addListener((FMLClientSetupEvent e) -> ModPonder.register());
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> ModPartials::load);
-        modEventBus.addListener(ModConfigs::onLoad);
-        modEventBus.addListener(ModConfigs::onReload);
-        ModConfigs.register();
-    }
+	public CreateAddon() {
+		modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		CreateRegistrate r = registrate.get();
+		ModItems.register(r);
+		ModBlocks.register(r);
+		ModEntities.register(r);
+		ModTiles.register(r);
+		if (DatagenModLoader.isRunningDataGen()) {
+			modEventBus.addListener((GatherDataEvent g) -> ModPonder.generateLang(r, g));
+		}
+		modEventBus.addListener((FMLClientSetupEvent e) -> ModPonder.register());
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+				() -> ModPartials::load);
+		ModConfigs.register();
+	}
 }
